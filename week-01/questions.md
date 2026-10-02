@@ -78,6 +78,71 @@ R - Reflection
 
 Fluent doesn't mean true. I still want to understand how the context limit affects what the model can use.
 
+Q4 - Hallucination Experiment
+
+A - Answer
+
+Question (same wording for both tools): Which paper introduced the Transformer architecture? Give the title, the authors, the year, and the venue where it was published.
+
+Tool 1: Claude
+Response summary: Attention Is All You Need, by Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser and Polosukhin. Published in 2017 at NIPS (now called NeurIPS).
+Verified claim: title, all eight authors, year.
+Evidence: arXiv listing shows the same title and the same eight authors, first submitted 12 June 2017.
+Result: correct on title, authors and year. The venue (NIPS 2017) I still need to confirm on the NeurIPS page, because the arXiv page does not list a venue.
+Lesson: a correct answer on a very famous paper doesn't show the tool is reliable on obscure topics.
+
+Tool 2: [PASTE TOOL NAME - ChatGPT or Gemini]
+Response summary: [PASTE 1-2 lines of what it answered]
+Verified claim: [which of title / authors / year / venue you checked]
+Evidence: arXiv listing, NeurIPS proceedings page
+Result: [correct / incomplete / wrong / unsupported]
+Lesson: [one sentence from what you actually saw]
+
+Full raw answers are saved in evidence/q4-answers.md.
+
+E - Evidence
+
+- arXiv listing: https://arxiv.org/abs/1706.03762
+- NeurIPS 2017 proceedings: https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+
+V - Verification
+
+I compared the title, authors, year and venue in each answer with the arXiv page and the NeurIPS page. The arXiv page gives the title, the eight authors, and "Submitted on 12 Jun 2017". [Open the NeurIPS page and confirm the venue is NIPS 2017, then keep this.] [Add what Tool 2 got right or wrong.] I did not check the paper's experimental results.
+
+R - Reflection
+
+A wrong or weak AI answer can still sound convincing because the model is built to produce fluent, likely text, and a confident tone looks the same whether the facts are right or wrong. If both answers were correct, my test did not expose a failure, probably because this paper is so widely cited that its details appear everywhere in the training data. A less famous paper would be a better test.
+
+
+Q5 - AI Assistant vs Search vs Authoritative Reference
+
+A - Answer
+
+Question used for all three: What is the difference between TCP and UDP?
+
+AI assistant (Claude): TCP sets up a connection first, makes sure data arrives, in order, and resends what gets lost. UDP just sends packets with no connection, no delivery guarantee and no ordering, so it has less overhead. Accuracy: matched the RFCs. Explanation: clear. Traceability: no sources given. Ease of verification: I had to check it separately.
+
+Web search: [Do a quick search and write the 2-3 pages you opened and what they said. Most explainer pages should say the same thing.] Accuracy: [rating]. Explanation: [rating]. Traceability: [are authors/dates shown?]. Ease of verification: [rating].
+
+Authoritative reference: RFC 9293 (TCP) and RFC 768 (UDP). Accuracy: highest, they are the standards. Explanation: dense and formal. Traceability: excellent, numbered and dated. Ease of verification: slower to read but easy to cite.
+
+One claim that needed care: "UDP is faster". It comes from lower overhead, but the RFCs don't promise it, so I would say "usually lower latency, not guaranteed".
+
+When I would use each: AI for a quick first explanation, search to compare sources and find references, and an authoritative source whenever the answer feeds a design, safety or security decision, or something I have to cite.
+
+E - Evidence
+
+- TCP: https://www.rfc-editor.org/rfc/rfc9293
+- UDP: https://www.rfc-editor.org/rfc/rfc768
+
+V - Verification
+
+[Open both RFCs and confirm: RFC 9293 describes TCP as reliable and connection-oriented and says it replaces RFC 793, and RFC 768 describes UDP without delivery guarantees.] [Add one thing the search results said that matched or differed.]
+
+R - Reflection
+
+All three agreed on the basics, so the main difference was traceability: only the RFC gave something official to cite. A search result is not automatically reliable, because some pages are shallow or anonymous.
+
 
 Q6 - What Is an AI Agent?
 
@@ -133,6 +198,34 @@ V - Verification
 R - Reflection
 
 AI output is a draft to check, not a decision.
+
+Q8 - Find AI Around You
+
+A - Answer
+
+1. Gmail spam filter. AI involved: yes (machine learning). Task: classification. Evidence: Google Workspace blog, https://workspace.google.com/blog/product-announcements/ridding-gmail-of-100-million-more-spam-messages-with-tensorflow. Conclusion: uses ML, along with some rule-based protections.
+
+2. Google Maps ETA. AI involved: yes. Task: prediction. Evidence: DeepMind blog, "Traffic prediction with advanced Graph Neural Networks", https://deepmind.google/discover/blog/traffic-prediction-with-advanced-graph-neural-networks/. It describes a Graph Neural Network model that predicts travel time for each road segment. Conclusion: ML on traffic data, confirmed by the source.
+
+3. Phone calculator app. AI involved: no. Task: fixed arithmetic. Evidence: none needed, it follows fixed rules and gives the same answer every time (my own reasoning). Conclusion: not AI.
+
+4. Fixed-timer traffic signal near my home. AI involved: probably not. Task: timing. Evidence: Not enough public evidence to conclude. Conclusion: Not enough public evidence to conclude.
+
+5. AI chat assistant I use ([PASTE the one you use]). AI involved: yes (language model). Task: generation. Evidence: Google ML Crash Course, https://developers.google.com/machine-learning/crash-course/llm. Conclusion: generates text token by token. Exact internals of a commercial model are not public.
+
+Rule-based alternative (Gmail): a keyword rule like "block mail containing 'lottery winner'" would catch some spam. But spammers change wording, and rules can't keep up with new styles, which is why ML is used.
+
+E - Evidence
+
+See the sources in each row.
+
+V - Verification
+
+For Maps I read DeepMind's own blog post. For Gmail I am relying on Google's blog link. [Open it once and confirm it says ML is used, then keep this.] I could not verify how the traffic signal works.
+
+R - Reflection
+
+Not everything that sounds smart is AI, and when I can't verify something it's better to say "Not enough public evidence to conclude" than to guess.
 
 
 Q9 - Prediction, Classification, Generation
