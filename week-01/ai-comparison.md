@@ -1,4 +1,4 @@
-# Week 01 AI Assistant Comparison
+# Week 01 AI Assistant Comparison:
 
 ## Common question
 [Paste the exact same question used with each tool]
